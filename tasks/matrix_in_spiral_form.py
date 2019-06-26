@@ -1,5 +1,5 @@
 import math
-from typing import Tuple
+from typing import Generator, List, Tuple
 
 
 def count_items_on_level(matrix_size: int, depth: int = 1, level: int = 1) -> int:
@@ -38,7 +38,7 @@ def get_item_coord_by_index_on_level(matrix_size: int, index: int = 0, level: in
     return coord[0] + (level - 1), coord[1] + (level - 1)
 
 
-def iter_matrix_in_spiral_form(matrix):
+def iter_matrix_in_spiral_form(matrix: List[int]) -> Generator[int, None, None]:
     size_ = len(matrix)
     depth_ = math.ceil(len(matrix) / 2)
     for level_ in range(1, depth_ + 1):
