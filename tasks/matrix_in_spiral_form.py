@@ -1,5 +1,9 @@
 import math
-from typing import Generator, List, Tuple
+from typing import Any, Generator, List, Tuple
+
+
+Coordinate = Tuple[int, int]
+Matrix = List[List[Any]]
 
 
 def count_items_on_level(matrix_size: int, depth: int = 1, level: int = 1) -> int:
@@ -13,7 +17,7 @@ def count_items_on_level(matrix_size: int, depth: int = 1, level: int = 1) -> in
     return item_num * item_num - 4
 
 
-def get_item_coord_by_index(matrix_size: int, index: int = 0) -> Tuple[int, int]:
+def get_item_coord_by_index(matrix_size: int, index: int = 0) -> Coordinate:
     arc_size = matrix_size - 1
     curr_arc = int(index / arc_size)
     item_idx_on_curr_arc = index % arc_size
@@ -32,15 +36,15 @@ def get_item_coord_by_index(matrix_size: int, index: int = 0) -> Tuple[int, int]
         return arc_size - item_idx_on_curr_arc, 0
 
 
-def get_item_coord_by_index_on_level(matrix_size: int, index: int = 0, level: int = 0) -> Tuple[int, int]:
+def get_item_coord_by_index_on_level(matrix_size: int, index: int = 0, level: int = 0) -> Coordinate:
     adjusted_size = math.ceil(matrix_size / level)
     coord = get_item_coord_by_index(adjusted_size, index)
     return coord[0] + (level - 1), coord[1] + (level - 1)
 
 
-def iter_matrix_in_spiral_form(matrix: List[List[int]]) -> Generator[Tuple[int, int], None, None]:
+def iter_matrix_in_spiral_form(matrix: Matrix) -> Generator[Coordinate, None, None]:
     size_ = len(matrix)
-    depth_ = math.ceil(len(matrix) / 2)
+    depth_ = math.ceil(size_ / 2)
     for level_ in range(1, depth_ + 1):
         items_on_level = count_items_on_level(matrix_size=size_, depth=depth_, level=level_)
         for i in range(0, items_on_level):
