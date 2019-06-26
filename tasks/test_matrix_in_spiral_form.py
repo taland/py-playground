@@ -1,5 +1,5 @@
 import pytest
-from matrix_in_spiral_form import (
+from tasks.matrix_in_spiral_form import (
     count_items_on_level,
     get_item_coord_by_index,
     get_item_coord_by_index_on_level,
